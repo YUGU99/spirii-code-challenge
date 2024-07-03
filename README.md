@@ -26,5 +26,6 @@
 
 ###
 
+To run it, please do "npm install" and "npm start".
 
 This README is generated using tool: https://profile-readme-generator.com/.
