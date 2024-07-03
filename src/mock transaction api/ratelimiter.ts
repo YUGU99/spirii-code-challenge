@@ -1,17 +1,34 @@
-import { Injectable } from '@nestjs/common';
+// rate-limiter.ts
 
-@Injectable()
 export class RateLimiter {
-  private limiter; //!!!what ratelimiter should be used? 
+  private readonly maxRequestsPerMinute: number;
+  private requestCount: number;
+  private lastRequestTimestamp: number;
 
-  constructor() {
-    this.limiter({
-      minTime: (60/5*1000), // 5 requests per minute -> 1 request every 12 seconds
-      maxConcurrent: 1,
-    });
+  constructor(maxRequestsPerMinute: number) {
+    this.maxRequestsPerMinute = maxRequestsPerMinute;
+    this.requestCount = 0;
+    this.lastRequestTimestamp = Date.now();
   }
 
-  public async schedule<T>(fn: () => Promise<T>): Promise<T> {
-    return this.limiter.schedule(fn);
+  // Wait if needed to enforce rate limiting
+  async waitIfNeeded(): Promise<void> {
+    const now = Date.now();
+    const timeSinceLastRequest = now - this.lastRequestTimestamp;
+    const minTimeBetweenRequests = 60000 / this.maxRequestsPerMinute;
+
+    if (timeSinceLastRequest < minTimeBetweenRequests) {
+      // Calculate wait time
+      
+    }
+    // Update last request timestamp 
+    
   }
+
+  // reset request count, check if within rate limit, etc.
+  ResetRequestCount(requestCount:number){
+    return newRequestCount;
+  }
+
+
 }
