@@ -18,9 +18,5 @@ export class TransactionController {
     return this.transactionService.getTransactionsByUserId(userId);
   }
 
-  //get aggregated user data by userId
-  @Get('aggregatedUser/:userId')
-  getAggregatedData(@Param('userId') userId: string): User {
-    return this.transactionService.getUser(userId);
-  }
+  
 }
